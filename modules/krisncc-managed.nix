@@ -1,9 +1,15 @@
 # THIS FILE IS OWNED BY krisNCC.
 #
-# krisNCC may regenerate this file only after showing a diff and receiving an
-# explicit save/apply action. Put hand-written Nix in free.nix or
-# local-system.nix instead; krisNCC must never edit those files.
+# krisNCC may change only this file, only after showing a diff and after an
+# explicit user action. Hand-written Nix belongs in free.nix or local-system.nix.
 { ... }:
 {
-  # Curated structural settings managed by krisNCC will appear here.
+  # Curated structural settings: useful to change from the GUI, but not daily
+  # runtime state. Values here intentionally override krisNOS framework defaults.
+  krisos.autoLogin = true;
+  krisos.bluetoothPowerOnBoot = false;
+
+  boot.loader.systemd-boot.configurationLimit = 5;
+  zramSwap.memoryPercent = 25;
+  time.timeZone = "Europe/Rome";
 }

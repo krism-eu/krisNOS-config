@@ -9,15 +9,13 @@ in
     ../../modules/free.nix
   ] ++ lib.optional (builtins.pathExists hardwareFile) hardwareFile;
 
+  # Machine identity and framework choices stay human-owned here.
   krisos = {
     userName = "kris";
     hostName = "krisnos";
-    autoLogin = true;
-    bluetoothPowerOnBoot = false;
     flatpak = true;
     distrobox = true;
     mutableRuntime = true;
-    bootEntryLimit = 5;
   };
 
   users.users.${config.krisos.userName} = {
@@ -32,7 +30,7 @@ in
       "lp"
     ];
 
-    # Rootless Podman is an implementation detail used by Distrobox.
+    # Rootless Podman is only the engine used by Distrobox.
     subUidRanges = [ { startUid = 100000; count = 65536; } ];
     subGidRanges = [ { startGid = 100000; count = 65536; } ];
   };
