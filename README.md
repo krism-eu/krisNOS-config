@@ -2,7 +2,7 @@
 
 Configurazione personale di krisNOS.
 
-Questo repository descrive **la macchina e le preferenze personali**; il framework, i moduli di sistema e il codice di krisNCC vivono in [`krism-eu/krisNOS`](https://github.com/krism-eu/krisNOS).
+Questo repository descrive **la macchina e le preferenze personali**; il framework, i moduli di sistema, l'installer Icicle e il codice di krisNCC vivono in [`krism-eu/krisNOS`](https://github.com/krism-eu/krisNOS).
 
 ## Collegamento
 
@@ -17,19 +17,27 @@ config personale      framework/moduli/krisNCC
 
 ## Sync
 
-La sincronizzazione è **sempre manuale**. krisNCC userà `kris-configctl` per mostrare stato/diff e, solo su richiesta esplicita, eseguire fetch/sync/build/apply.
+La sincronizzazione è **sempre manuale**. krisNCC usa `kris-configctl` per mostrare stato/diff e, solo su richiesta esplicita, eseguire fetch/sync/build/apply.
 
 Non esistono timer, pull al boot, pull al login o apply automatici.
 
-## Prima installazione
+## Installazione e primo bootstrap
 
-1. Clonare questo repo in `~/krisNOS-config`.
-2. Generare il vero `hosts/krisnos/hardware-configuration.nix` sulla macchina target.
-3. Aggiungerlo a Git solo dopo averlo controllato.
-4. Eseguire `nix flake lock` e committare `flake.lock`.
-5. Prima del primo reboot impostare **solo la password root/amministratore** localmente dalla live/installazione, per esempio `nixos-enter --root /mnt -c 'passwd root'`. Non versionarla.
-6. L'utente `kris` nasce volutamente senza password, usa autologin ed è in `wheel` con sudo passwordless nella configurazione iniziale; potrà essere irrigidito in seguito con `passwd kris` e `wheelNeedsPassword = true`.
-7. Validare/buildare prima di qualsiasi `switch`.
+L'installazione iniziale del sistema viene eseguita dalla ISO krisNOS tramite Icicle. Icicle genera la configurazione hardware della macchina reale e installa il framework krisNOS; questo repository personale entra in gioco dopo il primo avvio.
+
+Per collegare la macchina alla configurazione personale:
+
+1. clonare questo repo in `~/krisNOS-config` (oppure usare `kris-configctl init`);
+2. aggiungere in `hosts/krisnos/hardware-configuration.nix` la configurazione hardware generata per la macchina reale, dopo averla controllata;
+3. aggiornare esplicitamente il lock del framework con `nix flake update krisNOS` quando si vuole adottare una nuova revisione di krisNOS, quindi controllare e committare `flake.lock`;
+4. eseguire `kris-configctl validate` e `kris-configctl build`;
+5. solo dopo, applicare con `kris-configctl apply` o con il pulsante **Applica** di krisNCC.
+
+`kris-configctl` non modifica mai `flake.lock` durante validate/build/apply: un lock vecchio resta vecchio finché non viene aggiornato intenzionalmente.
+
+Se l'hostname scelto durante Icicle non coincide con il nome del solo host presente in questo repo, `kris-configctl` seleziona automaticamente quell'unico host. `KRISOS_HOST` resta disponibile come override esplicito quando il repository contiene più host.
+
+La policy iniziale è coerente con krisNCC: l'utente amministratore è nel gruppo `wheel` e le piccole operazioni privilegiate non interattive possono usare il wrapper sudo di NixOS. Le credenziali restano locali e non vengono versionate.
 
 Finché `hardware-configuration.nix` non esiste, la configurazione reale `krisnos` non viene esposta dal flake: è una protezione intenzionale contro un apply prematuro.
 
