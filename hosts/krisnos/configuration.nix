@@ -5,6 +5,8 @@ in
 {
   imports = [
     ../../modules/local-system.nix
+    ../../modules/krisncc-managed.nix
+    ../../modules/free.nix
   ] ++ lib.optional (builtins.pathExists hardwareFile) hardwareFile;
 
   krisos = {
