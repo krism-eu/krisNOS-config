@@ -9,7 +9,7 @@
   krisos.autoLogin = true;
   krisos.bluetoothPowerOnBoot = false;
 
-  boot.loader.systemd-boot.configurationLimit = 5;
+  krisos.bootEntryLimit = 5;
   zramSwap.memoryPercent = 25;
   time.timeZone = "Europe/Rome";
 }

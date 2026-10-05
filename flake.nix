@@ -18,7 +18,6 @@
       nixosConfigurations = lib.optionalAttrs hasHardware {
         krisnos = lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit self krisNOS; };
           modules = [
             krisNOS.nixosModules.krisos
             ./hosts/krisnos/configuration.nix
@@ -30,6 +29,6 @@
         krisnos-system = self.nixosConfigurations.krisnos.config.system.build.toplevel;
       };
 
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-rfc-style;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
     };
 }

@@ -27,7 +27,9 @@ Non esistono timer, pull al boot, pull al login o apply automatici.
 2. Generare il vero `hosts/krisnos/hardware-configuration.nix` sulla macchina target.
 3. Aggiungerlo a Git solo dopo averlo controllato.
 4. Eseguire `nix flake lock` e committare `flake.lock`.
-5. Validare/buildare prima di qualsiasi `switch`.
+5. Prima del primo reboot impostare **solo la password root/amministratore** localmente dalla live/installazione, per esempio `nixos-enter --root /mnt -c 'passwd root'`. Non versionarla.
+6. L'utente `kris` nasce volutamente senza password, usa autologin ed è in `wheel` con sudo passwordless nella configurazione iniziale; potrà essere irrigidito in seguito con `passwd kris` e `wheelNeedsPassword = true`.
+7. Validare/buildare prima di qualsiasi `switch`.
 
 Finché `hardware-configuration.nix` non esiste, la configurazione reale `krisnos` non viene esposta dal flake: è una protezione intenzionale contro un apply prematuro.
 

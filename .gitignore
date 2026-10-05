@@ -19,3 +19,5 @@ result-*
 # Runtime state belongs to the machine, not Git
 runtime/
 state/
+
+.directory
