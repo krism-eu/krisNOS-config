@@ -1,0 +1,10 @@
+# Do not use this file as the real hardware configuration.
+#
+# On the installed/target machine generate the real file with NixOS tooling,
+# review it, then save it as:
+#   hosts/krisnos/hardware-configuration.nix
+#
+# Disk identifiers and filesystems are intentionally not guessed here.
+{ ... }:
+{
+}

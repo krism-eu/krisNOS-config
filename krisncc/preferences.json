@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "configSync": {
+    "enabled": true,
+    "automatic": false,
+    "applyAfterSync": false,
+    "localPath": "~/krisNOS-config"
+  }
+}
