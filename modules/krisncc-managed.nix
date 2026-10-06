@@ -17,6 +17,5 @@
   # Managed by krisNCC. Do not edit inside this block.
   environment.systemPackages = with pkgs; [
   ];
-  nixpkgs.config.allowUnfree = false;
   # KRISNCC_SYSTEM_PACKAGES_END
 }
