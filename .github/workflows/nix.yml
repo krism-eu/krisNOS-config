@@ -1,0 +1,33 @@
+name: Nix check
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nix-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/determinate-nix-action@v3
+
+      - name: Format
+        run: nix fmt --no-update-lock-file -- --check flake.nix hosts modules
+
+      - name: Build complete personal system
+        run: nix build --no-update-lock-file --no-link --print-build-logs .#checks.x86_64-linux.krisnos-ci-system
