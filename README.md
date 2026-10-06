@@ -27,11 +27,13 @@ L'installazione iniziale del sistema viene eseguita dalla ISO krisNOS tramite Ic
 
 Per collegare la macchina alla configurazione personale:
 
-1. clonare questo repo in `~/krisNOS-config` (oppure usare `kris-configctl init`);
-2. aggiungere in `hosts/krisnos/hardware-configuration.nix` la configurazione hardware generata per la macchina reale, dopo averla controllata;
-3. aggiornare esplicitamente il lock del framework con `nix flake update krisNOS` quando si vuole adottare una nuova revisione di krisNOS, quindi controllare e committare `flake.lock`;
+1. clonare questo repository canonico in `~/krisNOS-config`;
+2. copiare `/etc/nixos/hardware-configuration.nix` in `hosts/krisnos/hardware-configuration.nix`, controllarlo e committarlo;
+3. verificare che `flake.lock` punti alla revisione del framework che si vuole usare; aggiornare `krisNOS` nel lock solo quando si decide esplicitamente di adottare una nuova revisione;
 4. eseguire `kris-configctl validate` e `kris-configctl build`;
 5. solo dopo, applicare con `kris-configctl apply` o con il pulsante **Applica** di krisNCC.
+
+`kris-configctl init` **non clona GitHub**: serve soltanto a inizializzare Git dentro una configurazione locale già esistente che contiene almeno `flake.nix`. Non è il percorso di bootstrap consigliato per una nuova installazione, perché il clone del repository canonico preserva la storia Git corretta.
 
 `kris-configctl` non modifica mai `flake.lock` durante validate/build/apply: un lock vecchio resta vecchio finché non viene aggiornato intenzionalmente.
 
