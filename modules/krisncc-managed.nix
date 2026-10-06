@@ -10,6 +10,13 @@
   krisos.bluetoothPowerOnBoot = false;
 
   krisos.bootEntryLimit = 5;
+
+  # System packages explicitly managed by krisNCC.
+  krisos.allowUnfreeSystemPackages = false;
+  krisos.extraSystemPackages = [
+    # krisNCC system packages: begin
+    # krisNCC system packages: end
+  ];
   zramSwap.memoryPercent = 25;
   time.timeZone = "Europe/Rome";
 }
