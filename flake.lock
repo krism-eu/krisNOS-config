@@ -81,11 +81,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1791239295,
-        "narHash": "sha256-U44P2sGhgzFyqs5zm9RNYJvMHwx+ghbStpVRD0zjMzg=",
+        "lastModified": 1791262755,
+        "narHash": "sha256-XOyjPbX35lMd6Q1G+GoLDLU9aSCa518d7b2e8uwaANs=",
         "owner": "krism-eu",
         "repo": "krisNOS",
-        "rev": "bcdedf3a3158d75db9e546f813873484f480d2e2",
+        "rev": "2c70bed04d502c34615fcf93460236bd0c2f9902",
         "type": "github"
       },
       "original": {
