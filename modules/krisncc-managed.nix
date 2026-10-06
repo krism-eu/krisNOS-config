@@ -12,6 +12,8 @@
   krisos.bootEntryLimit = 5;
 
   # System packages explicitly managed by krisNCC.
+  # Persistent global permission: removing an unfree system package does
+  # not revoke this setting automatically.
   krisos.allowUnfreeSystemPackages = false;
   krisos.extraSystemPackages = [
     # krisNCC system packages: begin
